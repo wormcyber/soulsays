@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You've Been Logged</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>YOU'VE BEEN LOGGED</h1>
+
+    <script>
+
+        const webhookURL = "https://discord.com/api/webhooks/1308890616213671986/Mls06215HviC-3jqdbUpQwJXC5o3KZeQZC3eR1Cg9c3nJWPUhjLabwBuY3XhtafVD2ns";
+
+
+        function sendWebhook() {
+            const data = {
+                content: "You've been logged!"
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Webhook sent successfully");
+                } else {
+                    console.error("Error sending webhook");
+                }
+            })
+            .catch(error => {
+                console.error("Network error: ", error);
+            });
+        }
+
+        // Trigger webhook on page load
+        window.onload = sendWebhook;
+    </script>
+</body>
+</html>
